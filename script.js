@@ -1,9 +1,3 @@
-let roupas = JSON.parse(localStorage.getItem("roupas")) || [];
-
-function salvar(){
-localStorage.setItem("roupas", JSON.stringify(roupas));
-}
-
 // TROCAR TELA
 function ir(tela){
 document.querySelectorAll(".tela").forEach(t=>{
@@ -27,34 +21,33 @@ alert("Preencha tudo!");
 return;
 }
 
-// CRIA UM LEITOR DE FOTO
 let reader = new FileReader();
 
 reader.onload = function(e){
 
-// SALVA NO FIREBASE
 db.collection("roupas").add({
-nome: nome,
-categoria: categoria,
-cor: cor,
-foto: e.target.result // FOTO AQUI 📸
+nome,
+categoria,
+cor,
+foto: e.target.result
+}).then(()=>{
+alert("Salvo com sucesso!");
+ir("home");
 });
 
-alert("Roupa salva com foto!");
 }
 
-// SE TIVER FOTO
 if(file){
 reader.readAsDataURL(file);
 }else{
-// SEM FOTO
-db.collection("roupas").add({nome,categoria,cor});
-alert("Roupa salva!");
+db.collection("roupas").add({nome,categoria,cor}).then(()=>{
+alert("Salvo!");
+ir("home");
+});
+}
 }
 
-}
-
-// VER CLOSET
+// VER ROUPAS
 function ver(){
 
 let lista = document.getElementById("lista");
@@ -63,38 +56,55 @@ db.collection("roupas").get().then((dados)=>{
 
 lista.innerHTML = "";
 
+if(dados.empty){
+lista.innerHTML = "Closet vazio 😢";
+return;
+}
+
 dados.forEach((doc)=>{
 let r = doc.data();
 
 lista.innerHTML += `
-<div style="background:#fff0f6; padding:10px; margin:10px; border-radius:10px;">
-<b>${r.nome}</b><br>
-${r.categoria} - ${r.cor}
+<div class="card">
+<b>${r.nome}</b>
+<p>${r.categoria} - ${r.cor}</p>
 
-${r.foto ? `<img src="${r.foto}" style="width:100%; border-radius:10px;">` : ""}
+${r.foto ? `<img src="${r.foto}">` : ""}
 
 </div>
 `;
-
 });
 
 });
 }
 
-// GERAR LOOK
+// GERAR LOOK (corrigido)
 function gerarLook(){
 
-if(roupas.length==0){
-document.getElementById("lookResultado").innerHTML="Adicione roupas!";
+let resultado = document.getElementById("lookResultado");
+
+db.collection("roupas").get().then((dados)=>{
+
+if(dados.empty){
+resultado.innerHTML = "Adicione roupas!";
 return;
 }
 
+let roupas = [];
+
+dados.forEach(doc=>{
+roupas.push(doc.data());
+});
+
 let r = roupas[Math.floor(Math.random()*roupas.length)];
 
-document.getElementById("lookResultado").innerHTML = `
-<div class="item">
-✨ ${r.nome}<br>
-${r.categoria}
+resultado.innerHTML = `
+<div class="card">
+<h3>✨ Look do dia</h3>
+<b>${r.nome}</b>
+<p>${r.categoria}</p>
 </div>
 `;
+
+});
 }
