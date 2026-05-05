@@ -5,26 +5,75 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Meu Closet</title>
 
-<link rel="manifest" href="manifest.json">
 <link rel="stylesheet" href="style.css">
 
-<meta name="theme-color" content="#ff4da6">
 </head>
 <body>
 
-<div class="app">
-
+<!-- TELA INICIAL -->
+<div id="home" class="tela ativa">
 <h1>👗 Meu Closet</h1>
 
-<button onclick="adicionarRoupa()">➕ Adicionar Roupa</button>
-
-<button onclick="verCloset()">👚 Ver Closet</button>
-
-<button onclick="montarLook()">✨ Montar Look</button>
-
-<div id="resultado"></div>
-
+<button onclick="ir('closet')">Abrir Meu Closet</button>
+<button onclick="ir('add')">Adicionar Nova Peça</button>
+<button onclick="ir('look')">Montar um Look</button>
 </div>
+
+<!-- TELA CLOSET -->
+<div id="closet" class="tela">
+<h2>👚 Meu Closet</h2>
+
+<div id="lista"></div>
+
+<button onclick="ir('home')">⬅ Voltar</button>
+</div>
+
+<!-- TELA ADICIONAR -->
+<div id="add" class="tela">
+<h2>➕ Nova Roupa</h2>
+
+<input id="nome" placeholder="Nome">
+<input type="file" id="foto">
+<select id="categoria">
+<option>Blusa</option>
+<option>Calça</option>
+<option>Vestido</option>
+<option>Sapato</option>
+</select>
+
+<input id="cor" placeholder="Cor">
+
+<button onclick="adicionar()">Salvar</button>
+<button onclick="ir('home')">⬅ Voltar</button>
+</div>
+
+<!-- TELA LOOK -->
+<div id="look" class="tela">
+<h2>✨ Look do Dia</h2>
+
+<div id="lookResultado"></div>
+
+<button onclick="gerarLook()">Gerar Look</button>
+<button onclick="ir('home')">⬅ Voltar</button>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyATplzB8KvTTpwClTUqTTcMxjwRzdTigJU",
+  authDomain: "meu-closet-8dbb2.firebaseapp.com",
+  projectId: "meu-closet-8dbb2",
+  storageBucket: "meu-closet-8dbb2.firebasestorage.app",
+  messagingSenderId: "620519345785",
+  appId: "1:620519345785:web:2d8a191ce20e35a0dd0ea8"
+};
+
+firebase.initializeApp(firebaseConfig);
+
+const db = firebase.firestore();
+</script>
 
 <script src="script.js"></script>
 </body>

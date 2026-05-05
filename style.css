@@ -1,49 +1,55 @@
 body{
 margin:0;
 font-family:Arial;
-background:linear-gradient(135deg,#ffd6f5,#d6eaff);
+background:#ffe4f2;
 display:flex;
 justify-content:center;
 align-items:center;
 height:100vh;
 }
 
-.app{
+.tela{
+display:none;
+width:100%;
+max-width:350px;
 background:white;
-width:330px;
-padding:30px;
-border-radius:25px;
-box-shadow:0 10px 30px rgba(0,0,0,0.15);
+padding:20px;
+border-radius:20px;
 text-align:center;
+box-shadow:0 10px 30px rgba(0,0,0,0.1);
 }
 
-h1{
-color:#ff4da6;
-margin-bottom:25px;
+.ativa{
+display:block;
 }
 
 button{
 width:100%;
-padding:15px;
-margin:10px 0;
+padding:12px;
+margin:8px 0;
 border:none;
 border-radius:15px;
 background:#ff4da6;
 color:white;
-font-size:17px;
-cursor:pointer;
-transition:0.3s;
+font-size:16px;
 }
 
-button:hover{
-background:#ff1493;
-transform:scale(1.03);
+input, select{
+width:100%;
+padding:10px;
+margin:5px 0;
+border-radius:10px;
+border:1px solid #ccc;
 }
 
-#resultado{
-margin-top:20px;
-font-size:18px;
-color:#333;
-max-height:250px;
-overflow:auto;
+#lista{
+margin-top:10px;
+text-align:left;
+}
+
+.item{
+background:#fff0f6;
+padding:10px;
+margin-bottom:8px;
+border-radius:10px;
 }
