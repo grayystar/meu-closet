@@ -35,40 +35,74 @@ fotoInput.addEventListener('change',()=>{
 // ADICIONAR
 function adicionar(){
 
- const nome = document.getElementById('nome').value;
- const categoria = document.getElementById('categoria').value;
- const cor = document.getElementById('cor').value;
- const file = document.getElementById('foto').files[0];
+const nome =
+document.getElementById('nome').value;
 
- if(!nome || !cor || !file){
-  alert('Preencha tudo e escolha uma foto!');
-  return;
- }
+const categoria =
+document.getElementById('categoria').value;
 
- const reader = new FileReader();
+const cor =
+document.getElementById('cor').value;
 
- reader.onload = function(e){
+const file =
+document.getElementById('foto').files[0];
 
-  db.collection('roupas').add({
-   nome:nome,
-   categoria:categoria,
-   cor:cor,
-   foto:e.target.result
-  }).then(()=>{
+if(!nome || !cor){
 
-   alert('Roupa salva com sucesso! 💖');
+alert("Preencha nome e cor");
 
-   document.getElementById('nome').value='';
-   document.getElementById('cor').value='';
-   document.getElementById('foto').value='';
-   document.getElementById('preview').style.display='none';
+return;
 
-   openScreen('closet');
+}
 
-  });
- }
+/* COM FOTO */
+if(file){
 
- reader.readAsDataURL(file);
+const reader = new FileReader();
+
+reader.onload = function(e){
+
+db.collection("roupas").add({
+
+nome:nome,
+categoria:categoria,
+cor:cor,
+foto:e.target.result
+
+}).then(()=>{
+
+alert("Roupa salva!");
+
+openScreen('closet');
+
+});
+
+}
+
+reader.readAsDataURL(file);
+
+}
+
+/* SEM FOTO */
+else{
+
+db.collection("roupas").add({
+
+nome:nome,
+categoria:categoria,
+cor:cor,
+foto:""
+
+}).then(()=>{
+
+alert("Roupa salva!");
+
+openScreen('closet');
+
+});
+
+}
+
 }
 
 // CARREGAR

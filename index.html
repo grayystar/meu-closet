@@ -17,22 +17,49 @@
 </head>
 <body>
 
+<!-- TELA INICIAL -->
+<section id="inicio" class="screen active">
+
+<div class="inicio-box">
+
+<h1 class="logo">
+Bichonas
+</h1>
+
+<p class="sub">
+Seu closet fashion 💖
+</p>
+
+<button class="entrar-btn"
+onclick="openScreen('home')">
+
+Entrar
+
+</button>
+
+</div>
+
+</section>
+
 <!-- HOME -->
-<section id="home" class="screen active">
+<section id="home" class="screen">
 
 <div class="logo-area">
-<h1>Meu Closet</h1>
-<p>Monte looks incríveis 💖</p>
+
+<h1>👗 Bichonas</h1>
+
+<p>Monte looks incríveis</p>
+
 </div>
 
 <div class="menu-home">
 
 <button onclick="openScreen('closet')">
-👗 Meu Guarda-Roupa
+👚 Meu Guarda-Roupa
 </button>
 
 <button onclick="openScreen('add')">
-➕ Adicionar Roupa
+➕ Nova Roupa
 </button>
 
 <button onclick="openScreen('look')">
@@ -90,13 +117,13 @@
 
 <input id="cor" placeholder="Cor">
 
-<label class="upload">
+<label for="foto" class="foto-btn">
 
-📸 Escolher Foto
-
-<input type="file" id="foto" hidden>
+📸 Adicionar Foto
 
 </label>
+
+<input type="file" id="foto" hidden>
 
 <img id="preview">
 
