@@ -1,83 +1,67 @@
 <!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meu Closet</title>
+
+<link rel="stylesheet" href="style.css">
+<link rel="manifest" href="manifest.json">
+
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+</head>
+<body>
+
+<!-- HOME -->
+<section id="home" class="screen active">
+
+<div class="logo-area">
+<h1>Meu Closet</h1>
+<p>Monte looks incríveis 💖</p>
 </div>
 
-<div class="botoes-home">
-<button onclick="ir('closet')">👚 Abrir Meu Closet</button>
-<button onclick="ir('add')">➕ Adicionar Nova Peça</button>
-<button onclick="ir('look')">✨ Montar um Look</button>
+<div class="menu-home">
+<button onclick="openScreen('closet')">👗 Meu Guarda-Roupa</button>
+<button onclick="openScreen('add')">➕ Adicionar Roupa</button>
+<button onclick="openScreen('look')">✨ Look do Dia</button>
 </div>
 
-</div>
+</section>
 
 <!-- CLOSET -->
-<div id="closet" class="tela">
+<section id="closet" class="screen">
 
-<div class="cabecalho">
-<button class="voltar" onclick="ir('home')">⬅</button>
-<h2>Meu Closet</h2>
+<div class="topbar">
+<button class="back" onclick="openScreen('home')">←</button>
+<h2>Meu Guarda-Roupa</h2>
 </div>
 
-<div id="lista"></div>
+<div id="lista" class="grid"></div>
 
-</div>
+</section>
 
 <!-- ADICIONAR -->
-<div id="add" class="tela">
+<section id="add" class="screen">
 
-<div class="cabecalho">
-<button class="voltar" onclick="ir('home')">⬅</button>
+<div class="topbar">
+<button class="back" onclick="openScreen('home')">←</button>
 <h2>Nova Roupa</h2>
 </div>
 
+<div class="formulario">
 <input id="nome" placeholder="Nome da roupa">
 
 <select id="categoria">
 <option>Blusa</option>
 <option>Calça</option>
 <option>Vestido</option>
+<option>Saia</option>
 <option>Sapato</option>
 <option>Jaqueta</option>
 </select>
 
-<input id="cor" placeholder="Cor da roupa">
+<input id="cor" placeholder="Cor">
 
-<label class="foto-btn">
-📸 Escolher Foto
-<input type="file" id="foto" hidden>
-</label>
-
-<button onclick="adicionar()">💾 Salvar Roupa</button>
-
-</div>
-
-<!-- LOOK -->
-<div id="look" class="tela">
-
-<div class="cabecalho">
-<button class="voltar" onclick="ir('home')">⬅</button>
-<h2>Look do Dia</h2>
-</div>
-
-<div id="lookResultado"></div>
-
-<button onclick="gerarLook()">✨ Gerar Look</button>
-
-</div>
-
-<script>
-const firebaseConfig = {
-  apiKey: "SUA_API_KEY",
-  authDomain: "SEU_AUTH_DOMAIN",
-  projectId: "SEU_PROJECT_ID",
-  storageBucket: "SEU_STORAGE_BUCKET",
-  messagingSenderId: "SEU_MESSAGING_ID",
-  appId: "SEU_APP_ID"
-};
-
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
-</script>
-
-<script src="script.js"></script>
-</body>
+<label class="upload">
 </html>

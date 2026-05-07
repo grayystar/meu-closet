@@ -1,88 +1,90 @@
-function ir(tela){
-   alert('Roupa salva!');
-   ir('closet');
-  };
+function openScreen(id){
 
- 
+ document.querySelectorAll('.screen').forEach(screen=>{
+  screen.classList.remove('active');
+ });
+
+ document.getElementById(id).classList.add('active');
+
+ if(id === 'closet'){
+  carregarRoupas();
+ }
+}
+
+// PREVIEW FOTO
+const fotoInput = document.getElementById('foto');
+
+fotoInput.addEventListener('change',()=>{
+
+ const file = fotoInput.files[0];
 
  if(file){
+  const reader = new FileReader();
+
+  reader.onload = function(e){
+   const preview = document.getElementById('preview');
+   preview.src = e.target.result;
+   preview.style.display = 'block';
+  }
+
   reader.readAsDataURL(file);
- }else{
+ }
+
+});
+
+// ADICIONAR
+function adicionar(){
+
+ const nome = document.getElementById('nome').value;
+ const categoria = document.getElementById('categoria').value;
+ const cor = document.getElementById('cor').value;
+ const file = document.getElementById('foto').files[0];
+
+ if(!nome || !cor || !file){
+  alert('Preencha tudo e escolha uma foto!');
+  return;
+ }
+
+ const reader = new FileReader();
+
+ reader.onload = function(e){
 
   db.collection('roupas').add({
    nome:nome,
    categoria:categoria,
-   cor:cor
+   cor:cor,
+   foto:e.target.result
   }).then(()=>{
-   alert('Roupa salva!');
-   ir('closet');
+
+   alert('Roupa salva com sucesso! 💖');
+
+   document.getElementById('nome').value='';
+   document.getElementById('cor').value='';
+   document.getElementById('foto').value='';
+   document.getElementById('preview').style.display='none';
+
+   openScreen('closet');
+
   });
  }
 
+ reader.readAsDataURL(file);
+}
 
-// VER ROUPAS
-function ver(){
+// CARREGAR
+function carregarRoupas(){
 
- let lista = document.getElementById('lista');
+ const lista = document.getElementById('lista');
+
+ lista.innerHTML = 'Carregando...';
 
  db.collection('roupas').get().then((dados)=>{
 
   lista.innerHTML = '';
 
   if(dados.empty){
-   lista.innerHTML = '<p>Seu closet está vazio 😢</p>';
-   return;
-  }
-
-  dados.forEach((doc)=>{
-
-   let r = doc.data();
-
-   lista.innerHTML += `
-   <div class="card">
-   <h3>${r.nome}</h3>
-   <p>${r.categoria} • ${r.cor}</p>
-
-   ${r.foto ? `<img src="${r.foto}">` : ''}
-
-   </div>
-   `;
-
-  });
-
+   lista.innerHTML = 'Nenhuma roupa cadastrada 😢';
+}
  });
 }
-
-// LOOK
-function gerarLook(){
-
- let resultado = document.getElementById('lookResultado');
-
- db.collection('roupas').get().then((dados)=>{
-
-  let roupas = [];
-
-  dados.forEach((doc)=>{
-   roupas.push(doc.data());
-  });
-
-  if(roupas.length == 0){
-   resultado.innerHTML = 'Adicione roupas primeiro!';
-   return;
-  }
-
-  let r = roupas[Math.floor(Math.random()*roupas.length)];
-
-  resultado.innerHTML = `
-  <div class="card">
-  <h3>✨ Seu look</h3>
-  <p>${r.nome}</p>
-  <p>${r.categoria}</p>
-
-  ${r.foto ? `<img src="${r.foto}">` : ''}
-
-  </div>
-  `;
-
- });
-}
+ 

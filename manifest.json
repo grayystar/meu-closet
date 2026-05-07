@@ -1,9 +1,8 @@
 {
-  "name":"Meu Closet",
-  "short_name":"Closet",
-  "start_url":"./index.html",
-  "display":"standalone",
-  "background_color":"#ffffff",
-  "theme_color":"#ff4da6",
-  "icons":[]
+ "name":"Meu Closet",
+ "short_name":"Closet",
+ "start_url":"index.html",
+ "display":"standalone",
+ "background_color":"#fff5fa",
+ "theme_color":"#ff4fa0"
 }
