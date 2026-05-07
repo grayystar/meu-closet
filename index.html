@@ -1,78 +1,80 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Meu Closet</title>
-
-<link rel="stylesheet" href="style.css">
-<link rel="manifest" href="manifest.json">
-
-</head>
-<body>
-
-<!-- TELA INICIAL -->
-<div id="home" class="tela ativa">
-<h1>👗 Meu Closet</h1>
-
-<button onclick="ir('closet')">Abrir Meu Closet</button>
-<button onclick="ir('add')">Adicionar Nova Peça</button>
-<button onclick="ir('look')">Montar um Look</button>
 </div>
 
-<!-- TELA CLOSET -->
+<div class="botoes-home">
+<button onclick="ir('closet')">👚 Abrir Meu Closet</button>
+<button onclick="ir('add')">➕ Adicionar Nova Peça</button>
+<button onclick="ir('look')">✨ Montar um Look</button>
+</div>
+
+</div>
+
+<!-- CLOSET -->
 <div id="closet" class="tela">
-<h2>👚 Meu Closet</h2>
+
+<div class="cabecalho">
+<button class="voltar" onclick="ir('home')">⬅</button>
+<h2>Meu Closet</h2>
+</div>
 
 <div id="lista"></div>
 
-<button onclick="ir('home')">⬅ Voltar</button>
 </div>
 
-<!-- TELA ADICIONAR -->
+<!-- ADICIONAR -->
 <div id="add" class="tela">
-<h2>➕ Nova Roupa</h2>
 
-<input id="nome" placeholder="Nome">
-<input type="file" id="foto">
+<div class="cabecalho">
+<button class="voltar" onclick="ir('home')">⬅</button>
+<h2>Nova Roupa</h2>
+</div>
+
+<input id="nome" placeholder="Nome da roupa">
+
 <select id="categoria">
 <option>Blusa</option>
 <option>Calça</option>
 <option>Vestido</option>
 <option>Sapato</option>
+<option>Jaqueta</option>
 </select>
 
-<input id="cor" placeholder="Cor">
+<input id="cor" placeholder="Cor da roupa">
 
-<button onclick="adicionar()">Salvar</button>
-<button onclick="ir('home')">⬅ Voltar</button>
+<label class="foto-btn">
+📸 Escolher Foto
+<input type="file" id="foto" hidden>
+</label>
+
+<button onclick="adicionar()">💾 Salvar Roupa</button>
+
 </div>
 
-<!-- TELA LOOK -->
+<!-- LOOK -->
 <div id="look" class="tela">
-<h2>✨ Look do Dia</h2>
+
+<div class="cabecalho">
+<button class="voltar" onclick="ir('home')">⬅</button>
+<h2>Look do Dia</h2>
+</div>
 
 <div id="lookResultado"></div>
 
-<button onclick="gerarLook()">Gerar Look</button>
-<button onclick="ir('home')">⬅ Voltar</button>
-</div>
+<button onclick="gerarLook()">✨ Gerar Look</button>
 
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+</div>
 
 <script>
 const firebaseConfig = {
-  apiKey: "AIzaSyATplzB8KvTTpwClTUqTTcMxjwRzdTigJU",
-  authDomain: "meu-closet-8dbb2.firebaseapp.com",
-  projectId: "meu-closet-8dbb2",
-  storageBucket: "meu-closet-8dbb2.firebasestorage.app",
-  messagingSenderId: "620519345785",
-  appId: "1:620519345785:web:2d8a191ce20e35a0dd0ea8"
+  apiKey: "SUA_API_KEY",
+  authDomain: "SEU_AUTH_DOMAIN",
+  projectId: "SEU_PROJECT_ID",
+  storageBucket: "SEU_STORAGE_BUCKET",
+  messagingSenderId: "SEU_MESSAGING_ID",
+  appId: "SEU_APP_ID"
 };
 
 firebase.initializeApp(firebaseConfig);
-
 const db = firebase.firestore();
 </script>
 

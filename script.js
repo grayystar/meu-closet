@@ -1,110 +1,88 @@
-// TROCAR TELA
 function ir(tela){
-document.querySelectorAll(".tela").forEach(t=>{
-t.classList.remove("ativa");
-});
-document.getElementById(tela).classList.add("ativa");
+   alert('Roupa salva!');
+   ir('closet');
+  };
 
-if(tela=="closet") ver();
-}
+ 
 
-// ADICIONAR ROUPA
-function adicionar(){
+ if(file){
+  reader.readAsDataURL(file);
+ }else{
 
-let nome = document.getElementById("nome").value;
-let categoria = document.getElementById("categoria").value;
-let cor = document.getElementById("cor").value;
-let file = document.getElementById("foto").files[0];
+  db.collection('roupas').add({
+   nome:nome,
+   categoria:categoria,
+   cor:cor
+  }).then(()=>{
+   alert('Roupa salva!');
+   ir('closet');
+  });
+ }
 
-if(!nome || !cor){
-alert("Preencha tudo!");
-return;
-}
-
-let reader = new FileReader();
-
-reader.onload = function(e){
-
-db.collection("roupas").add({
-nome,
-categoria,
-cor,
-foto: e.target.result
-}).then(()=>{
-alert("Salvo com sucesso!");
-ir("home");
-});
-
-}
-
-if(file){
-reader.readAsDataURL(file);
-}else{
-db.collection("roupas").add({nome,categoria,cor}).then(()=>{
-alert("Salvo!");
-ir("home");
-});
-}
-}
 
 // VER ROUPAS
 function ver(){
 
-let lista = document.getElementById("lista");
+ let lista = document.getElementById('lista');
 
-db.collection("roupas").get().then((dados)=>{
+ db.collection('roupas').get().then((dados)=>{
 
-lista.innerHTML = "";
+  lista.innerHTML = '';
 
-if(dados.empty){
-lista.innerHTML = "Closet vazio 😢";
-return;
+  if(dados.empty){
+   lista.innerHTML = '<p>Seu closet está vazio 😢</p>';
+   return;
+  }
+
+  dados.forEach((doc)=>{
+
+   let r = doc.data();
+
+   lista.innerHTML += `
+   <div class="card">
+   <h3>${r.nome}</h3>
+   <p>${r.categoria} • ${r.cor}</p>
+
+   ${r.foto ? `<img src="${r.foto}">` : ''}
+
+   </div>
+   `;
+
+  });
+
+ });
 }
 
-dados.forEach((doc)=>{
-let r = doc.data();
-
-lista.innerHTML += `
-<div class="card">
-<b>${r.nome}</b>
-<p>${r.categoria} - ${r.cor}</p>
-
-${r.foto ? `<img src="${r.foto}">` : ""}
-
-</div>
-`;
-});
-
-});
-}
-
-// GERAR LOOK (corrigido)
+// LOOK
 function gerarLook(){
 
-let resultado = document.getElementById("lookResultado");
+ let resultado = document.getElementById('lookResultado');
 
-db.collection("roupas").get().then((dados)=>{
+ db.collection('roupas').get().then((dados)=>{
 
-if(dados.empty){
-resultado.innerHTML = "Adicione roupas!";
-return;
-}
+  let roupas = [];
 
-let roupas = [];
+  dados.forEach((doc)=>{
+   roupas.push(doc.data());
+  });
 
-dados.forEach(doc=>{
-roupas.push(doc.data());
-});
+  if(roupas.length == 0){
+   resultado.innerHTML = 'Adicione roupas primeiro!';
+   return;
+  }
 
-let r = roupas[Math.floor(Math.random()*roupas.length)];
+  let r = roupas[Math.floor(Math.random()*roupas.length)];
 
-resultado.innerHTML = `
-<div class="card">
-<h3>✨ Look do dia</h3>
-<b>${r.nome}</b>
-<p>${r.categoria}</p>
-</div>
-`;
+  resultado.innerHTML = `
+  <div class="card">
+  <h3>✨ Seu look</h3>
+  <p>${r.nome}</p>
+  <p>${r.categoria}</p>
 
-});
+  ${r.foto ? `<img src="${r.foto}">` : ''}
+
+  </div>
+  `;
+
+ });
 }
