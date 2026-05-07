@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Meu Closet</title>
 
-<script src="script.js"></script>
 <link rel="stylesheet" href="style.css">
 <link rel="manifest" href="manifest.json">
 
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+
 </head>
 <body>
 
@@ -23,9 +26,19 @@
 </div>
 
 <div class="menu-home">
-<button onclick="openScreen('closet')">👗 Meu Guarda-Roupa</button>
-<button onclick="openScreen('add')">➕ Adicionar Roupa</button>
-<button onclick="openScreen('look')">✨ Look do Dia</button>
+
+<button onclick="openScreen('closet')">
+👗 Meu Guarda-Roupa
+</button>
+
+<button onclick="openScreen('add')">
+➕ Adicionar Roupa
+</button>
+
+<button onclick="openScreen('look')">
+✨ Look do Dia
+</button>
+
 </div>
 
 </section>
@@ -34,8 +47,13 @@
 <section id="closet" class="screen">
 
 <div class="topbar">
-<button class="back" onclick="openScreen('home')">←</button>
+
+<button class="back" onclick="openScreen('home')">
+←
+</button>
+
 <h2>Meu Guarda-Roupa</h2>
+
 </div>
 
 <div id="lista" class="grid"></div>
@@ -46,23 +64,98 @@
 <section id="add" class="screen">
 
 <div class="topbar">
-<button class="back" onclick="openScreen('home')">←</button>
+
+<button class="back" onclick="openScreen('home')">
+←
+</button>
+
 <h2>Nova Roupa</h2>
+
 </div>
 
 <div class="formulario">
+
 <input id="nome" placeholder="Nome da roupa">
 
 <select id="categoria">
+
 <option>Blusa</option>
 <option>Calça</option>
 <option>Vestido</option>
 <option>Saia</option>
 <option>Sapato</option>
 <option>Jaqueta</option>
+
 </select>
 
 <input id="cor" placeholder="Cor">
 
 <label class="upload">
+
+📸 Escolher Foto
+
+<input type="file" id="foto" hidden>
+
+</label>
+
+<img id="preview">
+
+<button class="salvar" onclick="adicionar()">
+Salvar Roupa
+</button>
+
+</div>
+
+</section>
+
+<!-- LOOK -->
+<section id="look" class="screen">
+
+<div class="topbar">
+
+<button class="back" onclick="openScreen('home')">
+←
+</button>
+
+<h2>Look do Dia</h2>
+
+</div>
+
+<div id="lookResultado"></div>
+
+<button onclick="gerarLook()">
+✨ Gerar Look
+</button>
+
+</section>
+
+<!-- FIREBASE -->
+<script>
+
+const firebaseConfig = {
+
+apiKey: "AIzaSyATplzB8KvTTpwClTUqTTcMxjwRzdTigJU",
+
+authDomain: "meu-closet-8dbb2.firebaseapp.com",
+
+projectId: "meu-closet-8dbb2",
+
+storageBucket: "meu-closet-8dbb2.firebasestorage.app",
+
+messagingSenderId: "620519345785",
+
+appId: "1:620519345785:web:2d8a191ce20e35a0dd0ea8"
+
+};
+
+firebase.initializeApp(firebaseConfig);
+
+const db = firebase.firestore();
+
+</script>
+
+<!-- SCRIPT -->
+<script src="script.js"></script>
+
+</body>
 </html>
