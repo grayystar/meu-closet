@@ -1,41 +1,119 @@
 *{
-gap:15px;
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:Arial, sans-serif;
+background:#fff0f6;
+}
+
+.tela{
+display:none;
+min-height:100vh;
+padding:25px;
+}
+
+.ativa{
+display:block;
+}
+
+.box{
+max-width:400px;
+margin:auto;
+margin-top:80px;
+background:white;
+padding:25px;
+border-radius:25px;
+box-shadow:0 5px 20px rgba(0,0,0,0.1);
+}
+
+h1,h2{
+color:#ff4da6;
+margin-bottom:15px;
+text-align:center;
+}
+
+p{
+text-align:center;
+margin-bottom:20px;
+color:#666;
 }
 
 input,
 select{
+width:100%;
 padding:15px;
 border:none;
 border-radius:15px;
+margin-top:12px;
+background:#f7f7f7;
 font-size:15px;
 }
 
-/* FOTO */
+button{
+width:100%;
+padding:16px;
+border:none;
+border-radius:18px;
+margin-top:15px;
+background:#ff4da6;
+color:white;
+font-size:16px;
+font-weight:bold;
+}
+
+.secundario{
+background:#ffd6ea;
+color:#ff4da6;
+}
+
+.topo{
+display:flex;
+align-items:center;
+gap:10px;
+margin-bottom:20px;
+}
+
+.voltar{
+width:55px;
+}
+
+.topo-home{
+text-align:center;
+margin-top:50px;
+margin-bottom:40px;
+}
+
+.formulario{
+max-width:500px;
+margin:auto;
+}
 
 .foto-btn{
+display:block;
 background:#ffd6ea;
 padding:18px;
 border-radius:18px;
 text-align:center;
+margin-top:15px;
 font-weight:bold;
 color:#ff4da6;
 }
 
 #preview{
 width:100%;
+margin-top:15px;
 border-radius:20px;
 display:none;
 }
-
-/* LISTA */
 
 .lista{
 display:flex;
 flex-direction:column;
 gap:20px;
 }
-
-/* CARD */
 
 .card{
 background:white;
@@ -50,11 +128,6 @@ height:250px;
 object-fit:cover;
 border-radius:20px;
 margin-bottom:10px;
-}
-
-.card h3{
-color:#ff4da6;
-margin-bottom:5px;
 }
 
 .sem-foto{

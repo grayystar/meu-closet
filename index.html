@@ -1,4 +1,105 @@
 <!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>BICHONAS</title>
+
+<link rel="stylesheet" href="style.css">
+<link rel="manifest" href="manifest.json">
+
+<meta name="theme-color" content="#ff4da6">
+</head>
+<body>
+
+<!-- LOGIN -->
+<section id="login" class="tela ativa">
+
+<div class="box">
+
+<h1>BICHONAS</h1>
+<p>Seu closet fashion 💖</p>
+
+<input type="email" id="email" placeholder="E-mail">
+<input type="password" id="senha" placeholder="Senha">
+
+<button onclick="entrar()">Entrar</button>
+<button class="secundario" onclick="abrirTela('cadastro')">
+Criar Conta
+</button>
+
+</div>
+
+</section>
+
+<!-- CADASTRO -->
+<section id="cadastro" class="tela">
+
+<div class="box">
+
+<h2>Criar Conta</h2>
+
+<input type="text" id="novoNome" placeholder="Seu nome">
+<input type="email" id="novoEmail" placeholder="Seu e-mail">
+<input type="password" id="novaSenha" placeholder="Sua senha">
+
+<button onclick="cadastrar()">Cadastrar</button>
+
+<button class="secundario"
+onclick="abrirTela('login')">
+Voltar
+</button>
+
+</div>
+
+</section>
+
+<!-- HOME -->
+<section id="home" class="tela">
+
+<div class="topo-home">
+
+<h1>👗 BICHONAS</h1>
+
+<p>Monte looks incríveis</p>
+
+</div>
+
+<button onclick="abrirTela('closet')">
+👚 Meu Closet
+</button>
+
+<button onclick="abrirTela('add')">
+➕ Adicionar Roupa
+</button>
+
+<button onclick="abrirTela('look')">
+✨ Look do Dia
+</button>
+
+</section>
+
+<!-- CLOSET -->
+<section id="closet" class="tela">
+
+<div class="topo">
+
+<button class="voltar"
+onclick="abrirTela('home')">
+←
+</button>
+
+<h2>Meu Closet</h2>
+
+</div>
+
+<div id="lista" class="lista"></div>
+
+</section>
+
+<!-- ADICIONAR -->
+<section id="add" class="tela">
 
 <div class="topo">
 
@@ -13,8 +114,7 @@ onclick="abrirTela('home')">
 
 <div class="formulario">
 
-<input id="nome"
-placeholder="Nome da roupa">
+<input id="nome" placeholder="Nome da roupa">
 
 <select id="categoria">
 <option>Blusa</option>
@@ -22,17 +122,13 @@ placeholder="Nome da roupa">
 <option>Vestido</option>
 <option>Saia</option>
 <option>Sapato</option>
-<option>Jaqueta</option>
 </select>
 
-<input id="cor"
-placeholder="Cor da roupa">
+<input id="cor" placeholder="Cor da roupa">
 
 <label class="foto-btn">
 📸 Adicionar Foto
-<input type="file"
-id="foto"
-hidden>
+<input type="file" id="foto" hidden>
 </label>
 
 <img id="preview">
